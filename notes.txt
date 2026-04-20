@@ -1,0 +1,36 @@
+Project notes (Generated using ChatGpt + Semi-Corrected with personal opinions)
+
+Tools used:
+- Python
+- requests
+- BeautifulSoup
+- pandas
+
+How to run:
+1. Install dependencies from requirements.txt
+2. Run: python main.py
+
+Output:
+- The scraper saves results into products.csv
+
+Assumptions:
+- Product cards are available in the collection HTML
+- Product detail pages contain description in a <p> tag with:
+  class="pv-details__info-item" and id="description-item"
+- Products with size options are stored as separate variants
+
+Key decisions:
+- Used requests + BeautifulSoup instead of browser automation for simplicity
+- Added pagination using ?page=1, ?page=2, etc.
+- Added delays between page requests to reduce rate-limiting risk
+- Used a Session object to reuse headers and connections
+
+Tradeoffs:
+- Simpler and easier to understand than Playwright
+- Faster to implement, but more likely to be blocked by anti-bot protection
+- Description scraping requires opening product pages, which slows execution
+
+Known limitations:
+- The site may return HTTP 429 (Too Many Requests)
+- If Glossier changes the HTML structure, selectors may stop working
+- The scraper currently stops when rate-limited
